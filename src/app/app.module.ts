@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from  '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { StudentListComponent } from './student/student-list/student-list.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { StudentListComponent } from './student/student-list/student-list.compon
     MatButtonModule, 
     MatMenuModule,
     MatTableModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

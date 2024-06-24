@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-student-list',
@@ -14,21 +15,16 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
   ],
 })
 export class StudentListComponent {
-  dataSource = [
-    {
-      name : "Kannan",
-      age: "12",
-      gender : "Male",
-      bloodGroup:"O+",
-      photoUrl: "../../assets/images/photos/kannan-photo.jpg"
-    },
-    {
-      name : "Sam",
-      age: "12",
-      gender : "Male",
-      bloodGroup:"A-"
-    }
-  ]
+  
+  constructor(private http: HttpClient){
+  }
+  dataSource = [] as any;
+  ngOnInit(): void {
+    this.http.get('https://localhost:44386/student/GetStudentListByClass/5/A').subscribe(data => {
+      this.dataSource = data
+    });
+  }
+
   
   columnsToDisplay = ['name', 'age', 'gender', 'bloodGroup'];
 
