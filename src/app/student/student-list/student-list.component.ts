@@ -28,6 +28,17 @@ export class StudentListComponent {
   
   columnsToDisplay = ['name', 'age', 'gender', 'bloodGroup'];
 
+  columnsToDisplayColumnTitle = [
+    {key: 'name', displayName: 'Name'}, 
+    {key: 'age', displayName: 'Age'}, 
+    {key: 'gender', displayName: 'Gender'}, 
+    {key: 'bloodGroup', displayName: 'Blood Group'},
+  ];
+
+  getColumnHeader(key:string){
+   return this.columnsToDisplayColumnTitle.find(x=>x.key == key)?.displayName;
+  }
+
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement: Student | null | undefined;
 }

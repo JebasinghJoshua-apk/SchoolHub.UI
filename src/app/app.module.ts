@@ -10,12 +10,14 @@ import { MatTableModule } from  '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { StudentListComponent } from './student/student-list/student-list.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
-    StudentListComponent
+    StudentListComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
