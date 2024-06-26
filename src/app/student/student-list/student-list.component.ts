@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { HttpClient } from '@angular/common/http';
+import { MatDialog} from '@angular/material/dialog';
+import { AddStudentComponent } from './add-student/add-student.component';
 
 @Component({
   selector: 'app-student-list',
@@ -16,16 +18,17 @@ import { HttpClient } from '@angular/common/http';
 })
 export class StudentListComponent {
   
-  constructor(private http: HttpClient){
+  constructor(private http: HttpClient,
+              public dialog: MatDialog){
   }
+
   dataSource = [] as any;
   ngOnInit(): void {
     this.http.get('https://localhost:44386/student/GetStudentListByClass/5/A').subscribe(data => {
       this.dataSource = data
     });
   }
-
-  
+ 
   columnsToDisplay = ['name', 'age', 'gender', 'bloodGroup'];
 
   columnsToDisplayColumnTitle = [
@@ -41,6 +44,11 @@ export class StudentListComponent {
 
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement: Student | null | undefined;
+
+
+  openDialog() {
+    const dialogRef = this.dialog.open(AddStudentComponent);
+  }
 }
 
 export interface Student {

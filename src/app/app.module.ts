@@ -11,13 +11,17 @@ import { MatIconModule } from '@angular/material/icon';
 import { StudentListComponent } from './student/student-list/student-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
+import { AddStudentComponent } from './student/student-list/add-student/add-student.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
     StudentListComponent,
-    HomeComponent
+    HomeComponent,
+    AddStudentComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +31,9 @@ import { HomeComponent } from './home/home.component';
     MatMenuModule,
     MatTableModule,
     MatIconModule,
-    HttpClientModule
+    MatDialogModule,
+    HttpClientModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
