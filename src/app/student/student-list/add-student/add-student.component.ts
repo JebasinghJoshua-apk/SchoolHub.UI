@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-add-student',
@@ -7,10 +7,18 @@ import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
   styleUrls: ['./add-student.component.css']
 })
 export class AddStudentComponent {
-  form: FormGroup | undefined;
+  public addStudent: FormGroup;
+  public studentName: string;
   constructor(private formBuilder: FormBuilder){
     
   }
+  public ngOnInit(): void {
+    this.addStudent = this.formBuilder.group({
+      IdProof: null,
+      studentName: [this.studentName, [Validators.required, Validators.pattern('[a-zA-Z]+([a-zA-Z ]+)*')]],
+    });
+  }
+
   submit(){
     
   }

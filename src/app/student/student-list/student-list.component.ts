@@ -47,7 +47,7 @@ export class StudentListComponent {
 
 
   openDialog() {
-    const dialogRef = this.dialog.open(AddStudentComponent);
+    const dialogRef = this.dialog.open(AddStudentComponent, {width : "620px", height: "420px"});
   }
 }
 
