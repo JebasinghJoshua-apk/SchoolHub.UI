@@ -1,8 +1,33 @@
-<div >
+<div>
   <div style="width: 100%;">
-    <button mat-raised-button (click)="openDialog()" style=" float: right; margin: 10px;" color="primary">Add Student</button>
+    <mat-form-field appearance="fill">
+      <mat-label>Choose a standard</mat-label>
+      <mat-select [(value)]="selectedClassStandard" (selectionChange)="classStandardChange($event.value)">
+        <mat-option value="1">I</mat-option>
+        <mat-option value="2">II</mat-option>
+        <mat-option value="3">III</mat-option>
+        <mat-option value="4">IV</mat-option>
+        <mat-option value="5">V</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field style="margin-left: 20px;" appearance="fill">
+      <mat-label>Choose Section</mat-label>
+      <mat-select [(value)]="selectedClassSection" (selectionChange)="classSectionChange($event.value)">
+        <mat-option value="A">A</mat-option>
+        <mat-option value="B">B</mat-option>
+        <mat-option value="C">C</mat-option>
+        <mat-option value="D">D</mat-option>
+        <mat-option value="E">E</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button (click)="openDialog()" style=" float: right; margin: 10px;" color="primary">Add
+      Student</button>
   </div>
-  <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+  <div *ngIf="selectedClassStandard == '' || selectedClassSection == ''">
+      Please Select class standard and section.
+  </div>
+  <table *ngIf="selectedClassStandard != '' && selectedClassSection != ''"
+     mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
     <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
       <th mat-header-cell *matHeaderCellDef> {{getColumnHeader(column)}} </th>
       <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
@@ -22,12 +47,12 @@
       <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
         <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
           <div class="example-element-diagram">
-            <img src={{element.photoFilePath}}  width="100" height="100">
-           
+            <img src={{element.photoFilePath}} width="100" height="100">
+
           </div>
           <div class="example-element-description">
             {{element.description}}
-            <span class="example-element-description-attribution"> 
+            <span class="example-element-description-attribution">
               <div class="example-element-position"> {{element.name}} </div>
               <div class="example-element-symbol"> {{element.age}} </div>
               <div class="example-element-name"> {{element.gender}} </div>

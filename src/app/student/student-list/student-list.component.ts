@@ -17,16 +17,16 @@ import { AddStudentComponent } from './add-student/add-student.component';
   ],
 })
 export class StudentListComponent {
-  
+  selectedClassStandard = "";
+  selectedClassSection = "";
+
   constructor(private http: HttpClient,
               public dialog: MatDialog){
   }
 
   dataSource = [] as any;
   ngOnInit(): void {
-    this.http.get('https://localhost:44386/student/GetStudentListByClass/5/A').subscribe(data => {
-      this.dataSource = data
-    });
+
   }
  
   columnsToDisplay = ['name', 'age', 'gender', 'bloodGroup'];
@@ -49,7 +49,24 @@ export class StudentListComponent {
   openDialog() {
     const dialogRef = this.dialog.open(AddStudentComponent, {width : "620px", height: "650px"});
   }
-}5
+  
+  classSectionChange(event:any){
+    this.LoadStudentListByClass();
+  }
+
+  classStandardChange(event:any){
+    this.LoadStudentListByClass()
+  }
+
+  LoadStudentListByClass(){
+    if(this.selectedClassStandard != '' && this.selectedClassSection != ''){
+      this.http.get('https://localhost:44386/student/GetStudentListByClass/' + this.selectedClassStandard + '/' + this.selectedClassSection).subscribe(data => {
+        this.dataSource = data
+      });
+    }
+  }
+
+}
 
 export interface Student {
   name: string;
