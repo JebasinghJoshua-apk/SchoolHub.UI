@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { HttpClient } from '@angular/common/http';
-import { MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { AddStudentComponent } from './add-student/add-student.component';
 
 @Component({
@@ -10,8 +10,8 @@ import { AddStudentComponent } from './add-student/add-student.component';
   styleUrls: ['./student-list.component.css'],
   animations: [
     trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
@@ -21,25 +21,25 @@ export class StudentListComponent {
   selectedClassSection = "";
 
   constructor(private http: HttpClient,
-              public dialog: MatDialog){
+    public dialog: MatDialog) {
   }
 
   dataSource = [] as any;
   ngOnInit(): void {
 
   }
- 
+
   columnsToDisplay = ['name', 'age', 'gender', 'bloodGroup'];
 
   columnsToDisplayColumnTitle = [
-    {key: 'name', displayName: 'Name'}, 
-    {key: 'age', displayName: 'Age'}, 
-    {key: 'gender', displayName: 'Gender'}, 
-    {key: 'bloodGroup', displayName: 'Blood Group'},
+    { key: 'name', displayName: 'Name' },
+    { key: 'age', displayName: 'Age' },
+    { key: 'gender', displayName: 'Gender' },
+    { key: 'bloodGroup', displayName: 'Blood Group' },
   ];
 
-  getColumnHeader(key:string){
-   return this.columnsToDisplayColumnTitle.find(x=>x.key == key)?.displayName;
+  getColumnHeader(key: string) {
+    return this.columnsToDisplayColumnTitle.find(x => x.key == key)?.displayName;
   }
 
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
@@ -47,25 +47,28 @@ export class StudentListComponent {
 
 
   openDialog() {
-    const dialogRef = this.dialog.open(AddStudentComponent, {width : "620px", height: "650px"});
+    const dialogRef = this.dialog.open(AddStudentComponent, 
+      { data: { selectedClassStandard: this.selectedClassStandard, selectedClassSection: this.selectedClassSection }, 
+        width: "650px", 
+        height: "700px" 
+      });
   }
-  
-  classSectionChange(event:any){
+
+  classSectionChange(event: any) {
     this.LoadStudentListByClass();
   }
 
-  classStandardChange(event:any){
+  classStandardChange(event: any) {
     this.LoadStudentListByClass()
   }
 
-  LoadStudentListByClass(){
-    if(this.selectedClassStandard != '' && this.selectedClassSection != ''){
+  LoadStudentListByClass() {
+    if (this.selectedClassStandard != '' && this.selectedClassSection != '') {
       this.http.get('https://localhost:44386/student/GetStudentListByClass/' + this.selectedClassStandard + '/' + this.selectedClassSection).subscribe(data => {
         this.dataSource = data
       });
     }
   }
-
 }
 
 export interface Student {

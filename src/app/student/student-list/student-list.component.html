@@ -20,7 +20,7 @@
         <mat-option value="E">E</mat-option>
       </mat-select>
     </mat-form-field>
-    <button mat-raised-button (click)="openDialog()" style=" float: right; margin: 10px;" color="primary">Add
+    <button mat-raised-button (click)="openDialog()" [disabled]="this.selectedClassStandard == '' || this.selectedClassSection == ''" style=" float: right; margin: 10px;" color="primary">Add
       Student</button>
   </div>
   <div *ngIf="selectedClassStandard == '' || selectedClassSection == ''">

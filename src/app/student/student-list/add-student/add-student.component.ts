@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { catchError } from 'rxjs';
 
 @Component({
@@ -9,6 +10,7 @@ import { catchError } from 'rxjs';
   styleUrls: ['./add-student.component.css']
 })
 export class AddStudentComponent {
+  
   public addStudent: FormGroup;
   public studentName: string;
   public dateOfBirth: string;
@@ -18,7 +20,10 @@ export class AddStudentComponent {
 
   constructor(private formBuilder: FormBuilder,
               private http: HttpClient,
+              @Inject(MAT_DIALOG_DATA) public data: any
   ){
+
+    console.log(data);
     
   }
   public ngOnInit(): void {
@@ -47,7 +52,8 @@ export class AddStudentComponent {
     addStudentModel.contactNumber1 = formValue.contactNumber1;
     addStudentModel.contactNumber2 = formValue.contactNumber2;
     addStudentModel.bloodGroup= formValue.bloodGroup;
-  
+    addStudentModel.classStandard = this.data.selectedClassStandard 
+    addStudentModel.classSection = this.data.selectedClassSection
     var result  = this.http.post<AddStudentModel>('https://localhost:44386/student/AddStudent', addStudentModel)
     result.subscribe((response: any) => {
       console.log(response);
@@ -78,4 +84,6 @@ export interface AddStudentModel {
   contactNumber1: string;
   contactNumber2 : string;
   bloodGroup : string;
+  classStandard : string;
+  classSection: string;
 }
