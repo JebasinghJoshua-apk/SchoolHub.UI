@@ -26,6 +26,7 @@ export class AddStudentComponent {
       studentName: [this.studentName, [Validators.required, Validators.pattern('[a-zA-Z]+([a-zA-Z ]+)*')]],
       dateOfBirth: [this.dateOfBirth, [Validators.required]],
       gender: [this.gender , [Validators.required]],
+      bloodGroup : [],
       fatherName : [],
       motherName: [],
       contactNumber1 : [],
@@ -45,6 +46,7 @@ export class AddStudentComponent {
     addStudentModel.motherName = formValue.motherName;
     addStudentModel.contactNumber1 = formValue.contactNumber1;
     addStudentModel.contactNumber2 = formValue.contactNumber2;
+    addStudentModel.bloodGroup= formValue.bloodGroup;
   
     var result  = this.http.post<AddStudentModel>('https://localhost:44386/student/AddStudent', addStudentModel)
     result.subscribe((response: any) => {
@@ -75,4 +77,5 @@ export interface AddStudentModel {
   motherName : string;
   contactNumber1: string;
   contactNumber2 : string;
+  bloodGroup : string;
 }
