@@ -3,6 +3,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import { AddStudentComponent } from './add-student/add-student.component';
+import { Configuration } from 'src/app/configuration';
 
 @Component({
   selector: 'app-student-list',
@@ -64,7 +65,7 @@ export class StudentListComponent {
 
   LoadStudentListByClass() {
     if (this.selectedClassStandard != '' && this.selectedClassSection != '') {
-      this.http.get('https://localhost:44386/student/GetStudentListByClass/' + this.selectedClassStandard + '/' + this.selectedClassSection).subscribe(data => {
+      this.http.get(Configuration.api_endpoint + '/student/GetStudentListByClass/' + this.selectedClassStandard + '/' + this.selectedClassSection).subscribe(data => {
         this.dataSource = data
       });
     }

@@ -3,6 +3,7 @@ import { Component, Inject } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { catchError } from 'rxjs';
+import { Configuration } from 'src/app/configuration';
 
 @Component({
   selector: 'app-add-student',
@@ -54,7 +55,7 @@ export class AddStudentComponent {
     addStudentModel.bloodGroup= formValue.bloodGroup;
     addStudentModel.classStandard = this.data.selectedClassStandard 
     addStudentModel.classSection = this.data.selectedClassSection
-    var result  = this.http.post<AddStudentModel>('https://localhost:44386/student/AddStudent', addStudentModel)
+    var result  = this.http.post<AddStudentModel>(Configuration.api_endpoint + '/student/AddStudent', addStudentModel)
     result.subscribe((response: any) => {
       console.log(response);
     });
