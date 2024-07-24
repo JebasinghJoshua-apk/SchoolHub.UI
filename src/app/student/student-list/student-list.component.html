@@ -3,21 +3,13 @@
     <mat-form-field appearance="fill">
       <mat-label>Choose a standard</mat-label>
       <mat-select [(value)]="selectedClassStandard" (selectionChange)="classStandardChange($event.value)">
-        <mat-option value="1">I</mat-option>
-        <mat-option value="2">II</mat-option>
-        <mat-option value="3">III</mat-option>
-        <mat-option value="4">IV</mat-option>
-        <mat-option value="5">V</mat-option>
+        <mat-option *ngFor = "let className of classNameList" [value]="className">{{className}}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field style="margin-left: 20px;" appearance="fill">
       <mat-label>Choose Section</mat-label>
       <mat-select [(value)]="selectedClassSection" (selectionChange)="classSectionChange($event.value)">
-        <mat-option value="A">A</mat-option>
-        <mat-option value="B">B</mat-option>
-        <mat-option value="C">C</mat-option>
-        <mat-option value="D">D</mat-option>
-        <mat-option value="E">E</mat-option>
+        <mat-option *ngFor = "let sectionName of sectionNameList" [value]="sectionName">{{sectionName}}</mat-option>
       </mat-select>
     </mat-form-field>
     <button mat-raised-button (click)="openDialog()" [disabled]="this.selectedClassStandard == '' || this.selectedClassSection == ''" style=" float: right; margin: 10px;" color="primary">Add

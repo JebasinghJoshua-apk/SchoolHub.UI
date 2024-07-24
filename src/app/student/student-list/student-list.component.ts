@@ -27,11 +27,12 @@ export class StudentListComponent {
 
   dataSource = [] as any;
   ngOnInit(): void {
-
+    this.LoadClassNames();
   }
 
   columnsToDisplay = ['name', 'age', 'gender', 'bloodGroup'];
-
+  classNameList = [] as string[];
+  sectionNameList = [] as string[];
   columnsToDisplayColumnTitle = [
     { key: 'name', displayName: 'Name' },
     { key: 'age', displayName: 'Age' },
@@ -60,7 +61,9 @@ export class StudentListComponent {
   }
 
   classStandardChange(event: any) {
-    this.LoadStudentListByClass()
+    this.dataSource = [];
+    this.LoadSection(this.selectedClassStandard);
+    //this.LoadStudentListByClass()
   }
 
   LoadStudentListByClass() {
@@ -69,6 +72,16 @@ export class StudentListComponent {
         this.dataSource = data
       });
     }
+  }
+  LoadClassNames(){
+    this.http.get<string[]>(Configuration.api_endpoint + '/student/GetClassList').subscribe(classList => {
+      this.classNameList=classList;
+    });
+  }
+  LoadSection(className:string){
+    this.http.get<string[]>(Configuration.api_endpoint + '/student/GetSectionlistByClass/'+ className).subscribe(section => {
+        this.sectionNameList=section;
+    });
   }
 }
 
