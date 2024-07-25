@@ -20,6 +20,7 @@ import { MAT_DATE_LOCALE, MatNativeDateModule  } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
+import { ClassListComponent } from './class/class-list/class-list.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,9 @@ import { MatSelectModule } from '@angular/material/select';
     MenuComponent,
     StudentListComponent,
     HomeComponent,
-    AddStudentComponent
+    AddStudentComponent,
+   
+    ClassListComponent
   ],
   imports: [
     BrowserModule,
