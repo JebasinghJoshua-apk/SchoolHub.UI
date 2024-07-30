@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
 import { Configuration } from 'src/app/configuration';
+import { AddClassComponent } from './add-class/add-class.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-class-list',
@@ -26,7 +28,7 @@ export class ClassListComponent {
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement:  null | undefined;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -43,6 +45,14 @@ export class ClassListComponent {
 
   getColumnHeader(key: string) {
     return this.columnsToDisplayColumnTitle.find(x => x.key == key)?.displayName;
+  }
+
+  openDialog(){
+    const dialogRef = this.dialog.open(AddClassComponent, 
+      {  
+        width: "650px", 
+        height: "700px" 
+      });
   }
 
 

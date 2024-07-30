@@ -21,6 +21,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { ClassListComponent } from './class/class-list/class-list.component';
+import { AddClassComponent } from './class/class-list/add-class/add-class.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ClassListComponent } from './class/class-list/class-list.component';
     HomeComponent,
     AddStudentComponent,
    
-    ClassListComponent
+    ClassListComponent,
+         AddClassComponent
   ],
   imports: [
     BrowserModule,

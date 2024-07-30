@@ -1,5 +1,9 @@
 <div>
     <div style="width: 100%;">
+    <button mat-raised-button (click)="openDialog()" style="float: right; margin: 10px;" color="primary">
+        Add Class</button>
+    </div>
+    <div style="width: 100%;">
         <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
             <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
                 <th mat-header-cell *matHeaderCellDef> {{getColumnHeader(column)}} </th>
